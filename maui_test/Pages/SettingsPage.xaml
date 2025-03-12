@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="maui_test.Pages.SettingsPage"
+             Title="Add new Filter">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Filters -->
+        <VerticalStackLayout Grid.Row="0">
+        
+            <Entry Placeholder="Name of the Filter"
+                   Text="{Binding FilterName, Mode=TwoWay}"
+                   Margin="10,0"/>
+
+            <Label Text="Filters"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="10,20,0,0"/>
+        
+        
+            <Entry x:Name="ExcludeProperty_Entry"
+                   Placeholder="Exclude news containing ..."
+                   Text="{Binding ExcludeProperty}"
+                   Margin="10,0"/>
+
+            <Button Text="Add filter"
+                    Padding="50,10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="0,10,0,0"
+                    Clicked="AddFilterBtn_Clicked"/>
+
+            <CollectionView ItemsSource="{Binding ExcludeFilters}"
+                            Margin="20">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}"
+                               HorizontalOptions="Center"
+                               FontSize="16"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <!-- Save Btn -->
+        <Button Grid.Row="1"
+                Text="Save"
+                FontSize="20"
+                FontAttributes="Bold"
+                Margin="10,0,10,10"
+                VerticalOptions="Center"
+                Clicked="SaveBtn_Clicked"/>
+
+    </Grid>
+    
+</ContentPage>
