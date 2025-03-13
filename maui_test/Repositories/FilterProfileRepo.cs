@@ -44,7 +44,7 @@ namespace maui_test.Repositories
             catch { }
         }
 
-        public async Task<ObservableCollection<FilterProfileDTO>?> Load()
+        public async Task<ObservableCollection<FilterProfileDTO>> Load()
         {
             try
             {
@@ -63,10 +63,25 @@ namespace maui_test.Repositories
                         }
                     }
 
-                    return queryResult != null ? new ObservableCollection<FilterProfileDTO>(queryResult) : null;
+                    return queryResult != null ? new ObservableCollection<FilterProfileDTO>(queryResult) : new();
                 }
             }
-            catch { return null; }
+            catch { return new(); }
+        }
+
+        public async Task<List<string>> LoadFiltersFromId(int id)
+        {
+            try
+            {
+                using (SQLiteConnection db = SQLConnection())
+                {
+                    string filter_Query = $"SELECT Filter FROM FilterProfile_Filter_JunctionTable WHERE ProfileId = ?";
+                    List<string> queryResult = db.Query<FilterDTO>(filter_Query, id).Select(f => f.Filter).ToList();
+
+                    return queryResult;
+                }
+            }
+            catch { return new(); }
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using maui_test.Pages;
-using maui_test.Services;
+﻿using maui_test.Services;
 using maui_test.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -21,13 +20,6 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
-		builder.Services.AddSingleton<HackerNewsAPI>();
-
-		builder.Services.AddTransient<AllNewsVM>();
-		builder.Services.AddTransient<SettingVM>();
-		builder.Services.AddTransient<TrendingVM>();
-		builder.Services.AddTransient<FilteredNewsVM>();
 
         return builder.Build();
 	}

@@ -6,9 +6,13 @@ public partial class TrendingPage : ContentPage
 {
 	private TrendingVM viewModel;
 
-	public TrendingPage(TrendingVM viewModel)
+	public TrendingPage()
 	{
 		InitializeComponent();
-		this.BindingContext = this.viewModel = viewModel;
+
+		this.viewModel = new();
+		this.BindingContext = this.viewModel;
 	}
+
+    private async void LoadMoreBtn_Clicked(object sender, EventArgs e) => _ = this.viewModel.LoadStorySummeries();
 }

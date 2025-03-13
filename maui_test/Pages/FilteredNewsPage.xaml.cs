@@ -1,29 +1,31 @@
 using maui_test.ViewModels;
-using System.Threading.Tasks;
 
 namespace maui_test.Pages;
 
-//[QueryProperty(nameof(filterId), "filterId")]
+[QueryProperty(nameof(FilterId), "filterId")]
 public partial class FilteredNewsPage : ContentPage
 {
-	//private string filterId { get; set; }
-
+	public string FilterId { get; set; }
 	private FilteredNewsVM viewModel;
 
-	public FilteredNewsPage(FilteredNewsVM viewModel)
+	public FilteredNewsPage()
 	{
 		InitializeComponent();
-		this.BindingContext = this.viewModel = viewModel;
+
+		this.viewModel = new();
+        this.BindingContext = this.viewModel;
 	}
 
-  //  protected override async void OnAppearing()
-  //  {
-  //      base.OnAppearing();
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
 
-		//if (!string.IsNullOrEmpty(this.filterId))
-		//{
-		//	await this.viewModel.LoadFilteredStorySummeries(int.Parse(this.filterId));
-  //      }
-		//else await this.viewModel.LoadFilteredStorySummeries(1);
-  //  }
+		if (!string.IsNullOrWhiteSpace(FilterId))
+		{
+            this.viewModel.CurrentFilterId = int.Parse(this.FilterId!);
+            await this.viewModel.LoadFilteredStorySummeries();
+		}
+    }
+
+    private async void LoadMoreBtn_Clicked(object sender, EventArgs e) => await this.viewModel.LoadFilteredStorySummeries();
 }

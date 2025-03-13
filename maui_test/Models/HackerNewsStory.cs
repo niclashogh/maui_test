@@ -1,6 +1,6 @@
 ﻿namespace maui_test.Models
 {
-    public class NewsStory
+    public class HackerNewsStory
     {
         public long Id { get; set; }
         public string By { get; set; }
@@ -9,7 +9,7 @@
         public string Title { get; set; }
         public string Url { get; set; }
 
-        public NewsStory(long id, string by, long score, long time, string title, string url)
+        public HackerNewsStory(long id, string by, long score, long time, string title, string url)
         {
             this.Id = id;
             this.By = by;
@@ -19,6 +19,6 @@
             this.Url = url;
         }
 
-        public NewsStory() { }
+        public HackerNewsStory() { }
     }
 }

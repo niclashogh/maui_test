@@ -1,15 +1,39 @@
-﻿using maui_test.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using maui_test.Models;
+using maui_test.Services;
+using System.Collections.ObjectModel;
 
 namespace maui_test.ViewModels
 {
     public class TrendingVM : NotifyPropertyChanged
     {
-        // Problem: To find trending acticals we have to load a big collection or the entirety to "rank" which is more trendy.
-        // There ofc. are workarounds but needs to be hardcoded with a trending-score minimum validation.
+        private DRNewsAPI api = new();
+
+        #region Variables & Properties
+        private ObservableCollection<DRNewsStory> stories = new();
+        public ObservableCollection<DRNewsStory> Stories
+        {
+            get { return this.stories; }
+            private set
+            {
+                this.stories = value;
+                OnPropertyChanged(nameof(this.Stories));
+            }
+        }
+        #endregion
+
+        public TrendingVM()
+        {
+            _ = LoadStorySummeries();
+        }
+
+        internal async Task LoadStorySummeries()
+        {
+            ObservableCollection<DRNewsStory> loaded = await api.GetStorySummeries(this.Stories.Count, 30);
+
+            foreach (DRNewsStory story in loaded)
+            {
+                this.Stories.Add(story);
+            }
+        }
     }
 }

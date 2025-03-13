@@ -14,9 +14,10 @@ namespace maui_test.Services
             var response = await client.GetFromJsonAsync<List<long>>("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty");
             return response ?? new();
         }
-        public async Task<NewsStory> GetStorySummery(long id)
+
+        public async Task<HackerNewsStory> GetStorySummery(long id)
         {
-            var response = await client.GetFromJsonAsync<NewsStory>($"https://hacker-news.firebaseio.com/v0/item/{id}.json?print=pretty");
+            var response = await client.GetFromJsonAsync<HackerNewsStory>($"https://hacker-news.firebaseio.com/v0/item/{id}.json?print=pretty");
             return response ?? new();
         }
 

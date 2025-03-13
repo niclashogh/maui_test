@@ -7,13 +7,13 @@ public partial class AllNewsPage : ContentPage
 {
     private AllNewsVM viewModel;
 
-    public AllNewsPage(AllNewsVM viewModel)
+    public AllNewsPage()
 	{
         InitializeComponent();
-        this.BindingContext = this.viewModel = viewModel;
-    }
 
-    private async void NewFilterBtn_Clicked(object sender, EventArgs e) => await Shell.Current.GoToAsync(nameof(SettingsPage));
+        this.viewModel = new();
+        this.BindingContext = this.viewModel;
+    }
 
     private async void LoadMoreBtn_Clicked(object sender, EventArgs e) => await this.viewModel.LoadStorySummeries();
 }

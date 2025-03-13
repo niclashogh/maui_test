@@ -8,18 +8,18 @@
     Title="H-News">
 
     <ShellContent
-        Title="All News"
+        Title="Hacker News"
         ContentTemplate="{DataTemplate pages:AllNewsPage}"
         Route="AllNewsPage" />
 
     <ShellContent
-        Title="Trending"
+        Title="DR News"
         ContentTemplate="{DataTemplate pages:TrendingPage}"
         Route="TrendingPage" />
 
     <ShellContent
-        Title="Filtered"
-        ContentTemplate="{DataTemplate pages:FilteredNewsPage}"
-        Route="FilteredNewsPage" />
+        Title="My Filters"
+        ContentTemplate="{DataTemplate pages:MyFiltersPage}"
+        Route="MyFiltersPage" />
 
 </Shell>

@@ -6,10 +6,12 @@ public partial class SettingsPage : ContentPage
 {
 	private SettingVM viewModel;
 
-	public SettingsPage(SettingVM viewModel)
+    public SettingsPage()
 	{
 		InitializeComponent();
-		BindingContext = this.viewModel = viewModel;
+
+		this.viewModel = new();
+		this.BindingContext = this.viewModel;
 	}
 
 	private void AddFilterBtn_Clicked(object sender, EventArgs e)
@@ -20,17 +22,7 @@ public partial class SettingsPage : ContentPage
 
     private async void SaveBtn_Clicked(object sender, EventArgs e)
     {
-		//await viewModel.SaveProfile();
-
-		// Hardcoded Solution
-		string filterId = "1";
-		Shell.Current.Items.Add(new ShellContent
-		{
-			Title = "Sample Filter",
-			ContentTemplate = new DataTemplate(typeof(FilteredNewsPage)),
-			Route = $"FilteredNews?filterId={filterId}"
-		});
-
-		await Shell.Current.GoToAsync($"FilteredNews?filterId={filterId}");
+		await viewModel.SaveProfile();
+		this.NameProperty_Entry.Focus();
     }
 }

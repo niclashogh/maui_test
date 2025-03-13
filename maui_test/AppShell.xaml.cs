@@ -9,6 +9,7 @@ namespace maui_test
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
+            Routing.RegisterRoute(nameof(FilteredNewsPage), typeof(FilteredNewsPage));
         }
     }
 }

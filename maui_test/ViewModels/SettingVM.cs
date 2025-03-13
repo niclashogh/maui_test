@@ -6,10 +6,19 @@ namespace maui_test.ViewModels
 {
     public class SettingVM : NotifyPropertyChanged
     {
-        private FilterProfileRepo Repository = new();
+        private FilterProfileRepo repository = new();
 
         #region Variables & Properties
-        public string FilterName { get; set; }
+        private string filterName = string.Empty;
+        public string FilterName
+        {
+            get { return this.filterName; }
+            set
+            {
+                this.filterName = value;
+                OnPropertyChanged(nameof(this.FilterName));
+            }
+        }
 
         private ObservableCollection<string> excludeFilters = new();
         public ObservableCollection<string> ExcludeFilters
@@ -48,6 +57,17 @@ namespace maui_test.ViewModels
             }
         }
 
-        internal async Task SaveProfile() => Repository.Add(this.FilterName, this.ExcludeFilters);
+        internal async Task SaveProfile()
+        {
+            if (!string.IsNullOrEmpty(this.FilterName))
+            {
+                if (this.ExcludeFilters.Any())
+                {
+                    repository.Add(this.FilterName, this.ExcludeFilters);
+                    this.ExcludeFilters = new();
+                    this.FilterName = string.Empty;
+                }
+            }
+        }
     }
 }

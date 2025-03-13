@@ -4,7 +4,7 @@ namespace maui_test.Services
 {
     public class DatabaseContext
     {
-        public string UserDB { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "user_data.db");
+        public string UserDB { get; } = Path.Combine(FileSystem.AppDataDirectory, "user_data.db");
 
         internal SQLiteConnection SQLConnection()
         {

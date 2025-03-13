@@ -6,13 +6,13 @@ namespace maui_test.ViewModels
 {
     public class AllNewsVM : NotifyPropertyChanged
     {
-        public readonly HackerNewsAPI Api;
+        private readonly HackerNewsAPI api = new();
 
         #region Variables & Properties
         private List<long> storyIds { get; set; } = new();
 
-        private ObservableCollection<NewsStory> stories = new();
-        public ObservableCollection<NewsStory> Stories
+        private ObservableCollection<HackerNewsStory> stories = new();
+        public ObservableCollection<HackerNewsStory> Stories
         {
             get { return this.stories; }
             private set
@@ -23,15 +23,14 @@ namespace maui_test.ViewModels
         }
         #endregion
 
-        public AllNewsVM(HackerNewsAPI api)
+        public AllNewsVM()
         {
-            this.Api = api;
             _ = LoadStoryIds();
         }
 
         private async Task LoadStoryIds()
         {
-            this.storyIds = await Api.GetStoryIds();
+            this.storyIds = await api.GetStoryIds();
             _ = LoadStorySummeries();
         }
 
@@ -43,7 +42,7 @@ namespace maui_test.ViewModels
 
                 foreach (long id in loadBatch)
                 {
-                    NewsStory story = await this.Api.GetStorySummery(id);
+                    HackerNewsStory story = await this.api.GetStorySummery(id);
                     this.Stories.Add(story);
                 }
             }
